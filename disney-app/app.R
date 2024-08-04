@@ -221,7 +221,12 @@ server <- function(input, output, session) {
                         "Wait Time: ", avg_wait_time, " min<br>",
                         "Height Requirement: ", ifelse(is.na(height_requirement), "None", paste(height_requirement, "inches")),
                         "<br>Sub-land: ", sub_land),
-        label = ~name
+        label = ~sprintf("%s, %d min%s%s", 
+                         name, 
+                         avg_wait_time, 
+                         ifelse(is.na(height_requirement), "", ","),
+                         ifelse(is.na(height_requirement), "", paste("\n", height_requirement, "inches"))),
+        labelOptions = labelOptions(noHide = FALSE, direction = "auto")
       ) %>%
       addRectangles(
         data = filtered_data() %>% filter(type == "attraction"),
@@ -235,7 +240,8 @@ server <- function(input, output, session) {
                         "Type: Attraction<br>",
                         "Wait Time: ", avg_wait_time, " min<br>",
                         "Sub-land: ", sub_land),
-        label = ~name
+        label = ~sprintf("%s, %d min", name, avg_wait_time),
+        labelOptions = labelOptions(noHide = FALSE, direction = "auto")
       ) %>%
       addLegend(
         position = "bottomright",
@@ -250,5 +256,4 @@ server <- function(input, output, session) {
       )
   })
 }
-
 shinyApp(ui, server)
