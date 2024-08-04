@@ -49,11 +49,29 @@ ui <- dashboardPage(
                                      choices = NULL)
                 ),
                 box(
-                  title = "Wait Times",
+                  title = "Wait Times (All Attractions)",
                   status = "primary",
                   solidHeader = TRUE,
                   width = 9,
                   plotOutput("barplot")
+                )
+              ),
+              fluidRow(
+                box(
+                  title = "Wait Times (Rides Only)",
+                  status = "primary",
+                  solidHeader = TRUE,
+                  width = 12,
+                  plotOutput("rides_barplot")
+                )
+              ),
+              fluidRow(
+                box(
+                  title = "Wait Times (Attractions Only)",
+                  status = "primary",
+                  solidHeader = TRUE,
+                  width = 12,
+                  plotOutput("attractions_barplot")
                 )
               ),
               fluidRow(
@@ -134,13 +152,45 @@ server <- function(input, output, session) {
     ggplot(filtered_data(), aes(x = reorder(name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
       geom_bar(stat = "identity") +
       coord_flip() +
-      labs(x = "Ride Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
+      labs(x = "Attraction Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
       scale_y_continuous(breaks = seq(0, max(filtered_data()$avg_wait_time, na.rm = TRUE), by = 10)) +
       scale_fill_manual(values = dark_colors) +
       theme_minimal() +
       theme(axis.text.y = element_text(angle = 0, hjust = 1))
   })
   
+  output$rides_barplot <- renderPlot({
+    req(filtered_data())
+    # Filter data for rides only
+    rides_only <- filtered_data() %>% filter(type == "ride")
+    
+    # Use Dark2 color palette
+    dark_colors <- brewer.pal(n = 8, name = "Dark2")
+    ggplot(rides_only, aes(x = reorder(name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
+      geom_bar(stat = "identity") +
+      coord_flip() +
+      labs(x = "Ride Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
+      scale_y_continuous(breaks = seq(0, max(rides_only$avg_wait_time, na.rm = TRUE), by = 10)) +
+      scale_fill_manual(values = dark_colors) +
+      theme_minimal() +
+      theme(axis.text.y = element_text(angle = 0, hjust = 1))
+  })
+  output$attractions_barplot <- renderPlot({
+    req(filtered_data())
+    # Filter data for attractions only
+    attractions_only <- filtered_data() %>% filter(type == "attraction")
+    
+    # Use Dark2 color palette
+    dark_colors <- brewer.pal(n = 8, name = "Dark2")
+    ggplot(attractions_only, aes(x = reorder(name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
+      geom_bar(stat = "identity") +
+      coord_flip() +
+      labs(x = "Attraction Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
+      scale_y_continuous(breaks = seq(0, max(attractions_only$avg_wait_time, na.rm = TRUE), by = 10)) +
+      scale_fill_manual(values = dark_colors) +
+      theme_minimal() +
+      theme(axis.text.y = element_text(angle = 0, hjust = 1))
+  })
   output$ride_table <- renderDT({
     req(filtered_data())
     datatable(filtered_data(), options = list(pageLength = 10))
