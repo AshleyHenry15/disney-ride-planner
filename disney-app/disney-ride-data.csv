@@ -1,82 +1,55 @@
-theme_park,sub_land,ride_name,height_requirement,avg_wait_time
-Magic Kingdom,Tomorrowland,Astro Orbiter,0,28
-Magic Kingdom,Fantasyland,The Barnstormer,35,20
-Magic Kingdom,Frontierland,Big Thunder Mountain Railroad,40,38
-Magic Kingdom,Tomorrowland,Buzz Lightyear’s Space Ranger Spin,0,31
-Magic Kingdom,Fantasyland,Casey Jr. Splash ‘N’ Soak Station,0,0
-Magic Kingdom,Frontierland,Country Bear Jamboree,0,15
-Magic Kingdom,Fantasyland,Dumbo the Flying Elephant,0,17
-Magic Kingdom,Fantasyland,Enchanted Tales with Belle,0,28
-Magic Kingdom,Frontierland,Frontierland Shootin’ Arcade,0,0
-Magic Kingdom,Liberty Square,The Hall of Presidents,0,12
-Magic Kingdom,Liberty Square,Haunted Mansion,0,38
-Magic Kingdom,Fantasyland,“it’s a small world”,0,21
-Magic Kingdom,Adventureland,Jungle Cruise,0,48
-Magic Kingdom,Liberty Square,Liberty Square Riverboat,0,15
-Magic Kingdom,Fantasyland,Mad Tea Party,0,12
-Magic Kingdom,Adventureland,The Magic Carpets of Aladdin,0,16
-Magic Kingdom,Fantasyland,The M0 Adventures of Winnie the Pooh,0,34
-Magic Kingdom,Fantasyland,Mickey’s PhilharMagic,0,15
-Magic Kingdom,Tomorrowland,"Monsters, Inc. Laugh Floor",0,13
-Magic Kingdom,Fantasyland,Peter Pan’s Flight,0,59
-Magic Kingdom,Adventureland,A Pirate’s Adventure ~ Treasures of the Seven Seas,0,0
-Magic Kingdom,Adventureland,Pirates of the Caribbean,0,26
-Magic Kingdom,Fantasyland,Prince Charming Regal Carrousel,0,10
-Magic Kingdom,Fantasyland,Seven Dwarfs Mine Train,38,72
-Magic Kingdom,Tomorrowland,Space Mountain,44,51
-Magic Kingdom,Adventureland,Swiss Family Treehouse,0,5
-Magic Kingdom,Tomorrowland,Tomorrowland Speedway,32,16
-Magic Kingdom,Tomorrowland,Tomorrowland Transit Authority PeopleMover,0,11
-Magic Kingdom,Frontierland,Tom Sawyer Island,0,5
-Magic Kingdom,Tomorrowland,TRON Lightcycle / Run,48,0
-Magic Kingdom,Fantasyland,Under the Sea ~ Journey of the Little Mermaid,0,21
-Magic Kingdom,Tomorrowland,Walt Disney’s Carousel of Progress,0,5
-Magic Kingdom,Adventureland,Walt Disney’s Enchanted Tiki Room,0,13
-Magic Kingdom,"Main Street, U.S.A",Walt Disney World Railroad,0,14
-EPCOT,World Discovery,Advanced Training Lab,0,0
-EPCOT,World Showcase,The American Adventure,0,0
-EPCOT,World Celebration,Disney & Pixar Short Film Festival,0,8
+theme_park,sub_land,name,height_requirement,avg_wait_time,type,latitude,longitude
+Magic Kingdom,Tomorrowland,Astro Orbiter,0,28,ride,28.41862804,-81.57915055
+Magic Kingdom,Fantasyland,The Barnstormer,35,20,ride,28.42103016,-81.57850885
+Magic Kingdom,Frontierland,Big Thunder Mountain Railroad,40,38,ride,28.4205395,-81.58457064
+Magic Kingdom,Tomorrowland,Buzz Lightyear’s Space Ranger Spin,0,31,ride,28.41834084,-81.57957105
+Magic Kingdom,Fantasyland,Dumbo the Flying Elephant,0,17,ride,28.42073243,-81.5790269
+Magic Kingdom,Liberty Square,Haunted Mansion,0,38,ride,28.4205909,-81.58308932
+Magic Kingdom,Fantasyland,“it’s a small world”,0,21,ride,28.42073535,-81.58186278
+Magic Kingdom,Adventureland,Jungle Cruise,0,48,ride,28.41820354,-81.58337024
+Magic Kingdom,Liberty Square,Liberty Square Riverboat,0,15,ride,28.41984143,-81.58286431
+Magic Kingdom,Fantasyland,Mad Tea Party,0,12,ride,28.42012364,-81.57965182
+Magic Kingdom,Adventureland,The Magic Carpets of Aladdin,0,16,ride,28.41869989,-81.58344827
+Magic Kingdom,Fantasyland,The Many Adventures of Winnie the Pooh,0,34,ride,28.42022311,-81.58055548
+Magic Kingdom,Fantasyland,Peter Pan’s Flight,0,59,ride,28.42055351,-81.58189148
+Magic Kingdom,Adventureland,Pirates of the Caribbean,0,26,ride,28.41872219,-81.58456697
+Magic Kingdom,Fantasyland,Prince Charming Regal Carrousel,0,10,ride,28.42103647,-81.58108249
+Magic Kingdom,Fantasyland,Seven Dwarfs Mine Train,38,72,ride,28.42156918,-81.5797659
+Magic Kingdom,Tomorrowland,Space Mountain,44,51,ride,28.41917713,-81.57755134
+Magic Kingdom,Tomorrowland,Tomorrowland Speedway,32,16,ride,28.42009307,-81.5794706
+Magic Kingdom,Tomorrowland,Tomorrowland Transit Authority PeopleMover,0,11,ride,28.41892051,-81.57888047
+Magic Kingdom,Tomorrowland,TRON Lightcycle / Run,48,0,ride,28.42121185,-81.57694059
+Magic Kingdom,Fantasyland,Under the Sea ~ Journey of the Little Mermaid,0,21,ride,28.42205099,-81.58001352
+Magic Kingdom,Tomorrowland,Walt Disney’s Carousel of Progress,0,5,ride,28.41880955,-81.5789885
+Magic Kingdom,"Main Street, U.S.A",Walt Disney World Railroad,0,14,ride,28.4211696,-81.57831403
 EPCOT,"
-World Showcase",Frozen Ever After,0,63
+World Showcase",Frozen Ever After,0,63,ride,28.37167063,-81.54672448
 EPCOT,"
-World Showcase",Gran Fiesta Tour Starring The Three Caballeros,0,10
-EPCOT,World Discovery,Guardians of the Galaxy: Cosmic Rewind,42,30
-EPCOT,World Showcase,Impressions de France,0,0
-EPCOT,World Celebration,Journey Into Imagination With Figment,0,13
-EPCOT,World Nature,Living with the Land,0,14
-EPCOT,World Discovery,Mission: SPACE,40,23
-EPCOT,World Showcase,O Canada!,0,18
-EPCOT,World Showcase,Reflections of China,0,0
+World Showcase",Gran Fiesta Tour Starring The Three Caballeros,0,10,ride,28.3729466,-81.54733165
+EPCOT,World Discovery,Guardians of the Galaxy: Cosmic Rewind,42,30,ride,28.37607722,-81.54798098
+EPCOT,World Celebration,Journey Into Imagination With Figment,0,13,ride,28.37367048,-81.55133227
+EPCOT,World Nature,Living with the Land,0,14,ride,28.37523107,-81.55254255
+EPCOT,World Discovery,Mission: SPACE,40,23,ride,28.37475397,-81.54727434
 EPCOT,"
-World Showcase",Remy's Ratatouille Adventure,0,73
-EPCOT,World Nature,The Seas with Nemo & Friends,0,13
-EPCOT,World Nature,Soarin’ Around the World,40,42
-EPCOT,World Celebration,Spaceship Earth,0,18
-EPCOT,World Discovery,Test Track,40,62
-EPCOT,World Nature,Turtle Talk With Crush,0,13
-Hollywood Studios,Toy Story Land,Alien Swirling Saucers,32,31
-Hollywood Studios,Hollywood Boulevard,Mickey & Minnie's Runaway Railway,0,55
-Hollywood Studios,Star Wars: Galaxy's Edge,Millennium Falcon: Smugglers Run,38,56
-Hollywood Studios,Grand Avenue,Muppet*Vision 3D,0,0
-Hollywood Studios,Sunset Boulevard,Rock ‘n’ Roller Coaster Starring Aerosmith,48,60
-Hollywood Studios,Toy Story Land,Slinky Dog Dash,38,79
-Hollywood Studios,Echo Lake,Star Tours,40,21
-Hollywood Studios,Star Wars: Galaxy's Edge,Star Wars: Rise of the Resistance,40,94
-Hollywood Studios,Toy Story Land,Toy Story Mania!,0,54
-Hollywood Studios,Sunset Boulevard,The Twilight Zone Tower of Terror,40,55
-Animal Kingdom,Rafiki's Planet Watch,Affection Section,0,0
-Animal Kingdom,Pandora,Avatar Flight of Passage,44,106
-Animal Kingdom,DinoLand U.S.A,The Boneyard,0,12
-Animal Kingdom,Rafiki's Planet Watch,Conservation Station,0,0
-Animal Kingdom,DinoLand U.S.A,DINOSAUR,40,26
-Animal Kingdom,Discovery Island,Discovery Island Trails,0,0
-Animal Kingdom,Asia,Expedition Everest - Legend of the Forbidden Mountain,44,32
-Animal Kingdom,Africa,Gorilla Falls Exploration Trail,0,12
-Animal Kingdom,Discovery Island,It’s Tough to be a Bug!,0,11
-Animal Kingdom,Asia,Kali River Rapids,38,31
-Animal Kingdom,Africa,Kilimanjaro Safaris,0,40
-Animal Kingdom,Asia,Maharajah Jungle Trek,0,0
-Animal Kingdom,Pandora,Na’vi River Journey,0,63
-Animal Kingdom,Discovery Island,Tree of Life,0,0
-Animal Kingdom,DinoLand U.S.A,TriceraTop Spin,0,8
-Animal Kingdom,Africa,Wildlife Express Train,0,20
+World Showcase",Remy's Ratatouille Adventure,0,73,ride,28.36909386,-81.55315945
+EPCOT,World Nature,The Seas with Nemo & Friends,0,13,ride,28.37585421,-81.550637
+EPCOT,World Nature,Soarin’ Around the World,40,42,ride,28.3743632,-81.55201161
+EPCOT,World Celebration,Spaceship Earth,0,18,ride,28.37634569,-81.54942584
+EPCOT,World Discovery,Test Track,40,62,ride,28.37385364,-81.54781516
+Hollywood Studios,Toy Story Land,Alien Swirling Saucers,32,31,ride,28.35626475,-81.56235687
+Hollywood Studios,Hollywood Boulevard,Mickey & Minnie's Runaway Railway,0,55,ride,28.35759365,-81.56061394
+Hollywood Studios,Star Wars: Galaxy's Edge,Millennium Falcon: Smugglers Run,38,56,ride,28.35458489,-81.5615545
+Hollywood Studios,Sunset Boulevard,Rock ‘n’ Roller Coaster Starring Aerosmith,48,60,ride,28.36061105,-81.56074425
+Hollywood Studios,Toy Story Land,Slinky Dog Dash,38,79,ride,28.35723108,-81.56301961
+Hollywood Studios,Echo Lake,Star Tours,40,21,ride,28.35630369,-81.559267
+Hollywood Studios,Star Wars: Galaxy's Edge,Star Wars: Rise of the Resistance,40,94,ride,28.35542621,-81.56070844
+Hollywood Studios,Toy Story Land,Toy Story Mania!,0,54,ride,28.35741081,-81.56192841
+Hollywood Studios,Sunset Boulevard,The Twilight Zone Tower of Terror,40,55,ride,28.36110873,-81.56019521
+Animal Kingdom,Pandora,Avatar Flight of Passage,44,106,ride,28.35506774,-81.59275991
+Animal Kingdom,DinoLand U.S.A,DINOSAUR,40,26,ride,28.35559346,-81.58830544
+Animal Kingdom,Asia,Expedition Everest Legend of the Forbidden Mountain,44,32,ride,28.35893978,-81.58643057
+Animal Kingdom,Asia,Kali River Rapids,38,31,ride,28.3597913,-81.58876644
+Animal Kingdom,Africa,Kilimanjaro Safaris,0,40,ride,28.36404492,-81.59403919
+Animal Kingdom,Pandora,Na’vi River Journey,0,63,ride,28.35558201,-81.59179619
+Animal Kingdom,DinoLand U.S.A,TriceraTop Spin,0,8,ride,28.35741081,-81.58818682
+Animal Kingdom,Africa,Wildlife Express Train,0,20,ride,28.36045286,-81.59134422

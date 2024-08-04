@@ -15,18 +15,27 @@ library(RColorBrewer)
 # Function to read data from CSV file
 read_csv_data <- function(file_path) {
   tryCatch({
-    read_csv(file_path)
+    data <- read_csv(file_path)
+    # Rename 'ride_name' or 'attraction_name' column to 'name' if present
+    if ("ride_name" %in% colnames(data)) {
+      data <- data %>% rename(name = ride_name)
+    } else if ("attraction_name" %in% colnames(data)) {
+      data <- data %>% rename(name = attraction_name)
+    }
+    data
   }, error = function(e) {
     message("Failed to read CSV file. Error: ", e$message)
     NULL
   })
 }
 
-# CSV file path - Update this to your local file path
-csv_file_path <- "disney-ride-data.csv"  # Modify this path
+# CSV file paths
+ride_file_path <- "disney-ride-data.csv"
+attraction_file_path <- "disney-attractions.csv"
+show_file_path <- "disney-show-data.csv"
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Disney World Ride Wait Times"),
+  dashboardHeader(title = "Disney World Experience"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Visualizations", tabName = "visualizations", icon = icon("chart-bar")),
@@ -43,13 +52,15 @@ ui <- dashboardPage(
                   status = "primary",
                   solidHeader = TRUE,
                   width = 3,
+                  selectInput("data_type", "Data Type:", 
+                              choices = c("Rides", "Attractions", "Shows")),
                   selectInput("theme_park", "Theme Park:", choices = NULL),
                   selectInput("sub_land", "Sub-land:", choices = NULL),
                   checkboxGroupInput("height_requirement", "Height Requirements (inches):",
                                      choices = NULL)
                 ),
                 box(
-                  title = "Ride Wait Times",
+                  title = "Wait Times / Duration",
                   status = "primary",
                   solidHeader = TRUE,
                   width = 9,
@@ -69,11 +80,11 @@ ui <- dashboardPage(
       tabItem(tabName = "data_table",
               fluidRow(
                 box(
-                  title = "Ride Data",
+                  title = "Data",
                   status = "primary",
                   solidHeader = TRUE,
                   width = 12,
-                  DTOutput("ride_table")
+                  DTOutput("data_table")
                 )
               )
       )
@@ -82,35 +93,43 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) {
-  rides_data <- reactiveVal(NULL)
+  all_data <- reactiveVal(NULL)
   
   observeEvent(input$load_data, {
     withProgress(message = 'Loading data...', value = 0.1, {
-      data <- read_csv_data(csv_file_path)
-      incProgress(0.9)
-      if (!is.null(data)) {
-        # Add dummy latitude and longitude for demonstration
-        data$latitude <- runif(nrow(data), 28.3, 28.4)
-        data$longitude <- runif(nrow(data), -81.6, -81.5)
-        rides_data(data)
-        updateSelectInput(session, "theme_park", choices = unique(data$theme_park))
-        updateSelectInput(session, "sub_land", choices = c("All", unique(data$sub_land)))
+      ride_data <- read_csv_data(ride_file_path)
+      incProgress(0.3)
+      attraction_data <- read_csv_data(attraction_file_path)
+      incProgress(0.3)
+      show_data <- read_csv_data(show_file_path)
+      incProgress(0.3)
+      
+      if (!is.null(ride_data) && !is.null(attraction_data) && !is.null(show_data)) {
+        ride_data$data_type <- "Rides"
+        attraction_data$data_type <- "Attractions"
+        show_data$data_type <- "Shows"
         
-        # Update height requirement checkboxes with only supplied values
-        height_choices <- sort(unique(data$height_requirement[!is.na(data$height_requirement)]))
+        combined_data <- bind_rows(ride_data, attraction_data, show_data)
+        all_data(combined_data)
+        
+        updateSelectInput(session, "theme_park", choices = unique(combined_data$theme_park))
+        updateSelectInput(session, "sub_land", choices = c("All", unique(combined_data$sub_land)))
+        
+        height_choices <- sort(unique(combined_data$height_requirement[!is.na(combined_data$height_requirement)]))
         updateCheckboxGroupInput(session, "height_requirement", 
                                  choices = height_choices,
                                  selected = height_choices)
       } else {
-        showNotification("Failed to load data. Please check the CSV file.", type = "error")
+        showNotification("Failed to load one or more data files. Please check the CSV files.", type = "error")
       }
     })
   })
   
   filtered_data <- reactive({
-    req(rides_data())
-    data <- rides_data() %>%
-      filter(theme_park == input$theme_park)
+    req(all_data())
+    data <- all_data() %>%
+      filter(data_type == input$data_type,
+             theme_park == input$theme_park)
     
     if (length(input$height_requirement) > 0) {
       data <- data %>% filter(height_requirement %in% input$height_requirement | is.na(height_requirement))
@@ -124,8 +143,8 @@ server <- function(input, output, session) {
   })
   
   observe({
-    req(rides_data())
-    park_sublands <- unique(rides_data()$sub_land[rides_data()$theme_park == input$theme_park])
+    req(all_data())
+    park_sublands <- unique(all_data()$sub_land[all_data()$theme_park == input$theme_park & all_data()$data_type == input$data_type])
     updateSelectInput(session, "sub_land", choices = c("All", park_sublands))
   })
   
@@ -133,17 +152,21 @@ server <- function(input, output, session) {
     req(filtered_data())
     # Use Dark2 color palette
     dark_colors <- brewer.pal(n = 8, name = "Dark2")
-    ggplot(filtered_data(), aes(x = reorder(ride_name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
+    
+    y_var <- ifelse(input$data_type == "Shows", "duration", "avg_wait_time")
+    y_label <- ifelse(input$data_type == "Shows", "Duration (minutes)", "Average Wait Time (minutes)")
+    
+    ggplot(filtered_data(), aes(x = reorder(name, .data[[y_var]]), y = .data[[y_var]], fill = sub_land)) +
       geom_bar(stat = "identity") +
       coord_flip() +
-      labs(x = "Ride Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
-      scale_y_continuous(breaks = seq(0, max(filtered_data()$avg_wait_time, na.rm = TRUE), by = 10)) +
+      labs(x = "Name", y = y_label, fill = "Sub-land") +
+      scale_y_continuous(breaks = seq(0, max(filtered_data()[[y_var]], na.rm = TRUE), by = 10)) +
       scale_fill_manual(values = dark_colors) +
       theme_minimal() +
       theme(axis.text.y = element_text(angle = 0, hjust = 1))
   })
   
-  output$ride_table <- renderDT({
+  output$data_table <- renderDT({
     req(filtered_data())
     datatable(filtered_data(), options = list(pageLength = 10))
   })
@@ -156,32 +179,4 @@ server <- function(input, output, session) {
     dark_colors <- brewer.pal(n = max(8, length(sub_lands)), name = "Dark2")
     pal <- colorFactor(palette = dark_colors, domain = sub_lands)
     
-    leaflet(filtered_data()) %>%
-      addTiles() %>%
-      addCircleMarkers(
-        ~longitude, ~latitude,
-        color = ~pal(sub_land),
-        radius = 8,
-        fillOpacity = 0.8,
-        stroke = FALSE,
-        popup = ~paste0("<strong>", ride_name, "</strong><br>",
-                        "Wait Time: ", avg_wait_time, " min<br>",
-                        "Height Requirement: ", ifelse(is.na(height_requirement), "None", paste(height_requirement, "inches")),
-                        "<br>Sub-land: ", sub_land),
-        label = ~ride_name
-      ) %>%
-      addLegend(
-        position = "bottomright",
-        pal = pal,
-        values = ~sub_land,
-        title = "Sub-lands",
-        opacity = 1
-      ) %>%
-      fitBounds(
-        ~min(longitude), ~min(latitude),
-        ~max(longitude), ~max(latitude)
-      )
-  })
-}
-
-shinyApp(ui, server)
+    popup_content
