@@ -175,10 +175,13 @@ server <- function(input, output, session) {
       theme_minimal() +
       theme(axis.text.y = element_text(angle = 0, hjust = 1))
   })
+  
   output$attractions_barplot <- renderPlot({
-    req(filtered_data())
-    # Filter data for attractions only
-    attractions_only <- filtered_data() %>% filter(type == "attraction")
+    req(rides_data())
+    # Filter data for attractions only, without applying height requirement filter
+    attractions_only <- rides_data() %>% 
+      filter(theme_park == input$theme_park, type == "attraction") %>%
+      {if(input$sub_land != "All") filter(., sub_land == input$sub_land) else .}
     
     # Use Dark2 color palette
     dark_colors <- brewer.pal(n = 8, name = "Dark2")
