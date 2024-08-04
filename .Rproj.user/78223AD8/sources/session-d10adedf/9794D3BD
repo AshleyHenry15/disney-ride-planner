@@ -3,7 +3,7 @@
     "path": "~/GitHub/Repositories/disney-app/disney-app/disney-ride-data.csv",
     "project_path": "disney-app/disney-ride-data.csv",
     "type": "text",
-    "hash": "4100611806",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1722737517009.0,
@@ -16,11 +16,11 @@
         "scrollLine": "65"
     },
     "folds": "",
-    "lastKnownWriteTime": 1722787002,
+    "lastKnownWriteTime": 1722790030,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1722787002457,
+    "last_content_update": 1722790030,
     "read_only": false,
     "read_only_alternatives": []
 }
