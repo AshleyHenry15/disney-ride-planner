@@ -26,7 +26,7 @@ read_csv_data <- function(file_path) {
 csv_file_path <- "disney-all-data.csv"  # Modify this path
 
 ui <- dashboardPage(
-  dashboardHeader(title = "Disney World Ride Wait Times"),
+  dashboardHeader(title = "Disney World Wait Times"),
   dashboardSidebar(
     sidebarMenu(
       menuItem("Visualizations", tabName = "visualizations", icon = icon("chart-bar")),
@@ -49,7 +49,7 @@ ui <- dashboardPage(
                                      choices = NULL)
                 ),
                 box(
-                  title = "Ride Wait Times",
+                  title = "Wait Times",
                   status = "primary",
                   solidHeader = TRUE,
                   width = 9,
@@ -166,7 +166,7 @@ server <- function(input, output, session) {
                         "Wait Time: ", avg_wait_time, " min<br>",
                         "Height Requirement: ", ifelse(is.na(height_requirement), "None", paste(height_requirement, "inches")),
                         "<br>Sub-land: ", sub_land),
-        label = ~ride_name
+        label = ~name
       ) %>%
       addLegend(
         position = "bottomright",
