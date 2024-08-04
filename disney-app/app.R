@@ -89,9 +89,7 @@ server <- function(input, output, session) {
       data <- read_csv_data(csv_file_path)
       incProgress(0.9)
       if (!is.null(data)) {
-        # Add dummy latitude and longitude for demonstration
-        data$latitude <- runif(nrow(data), 28.3, 28.4)
-        data$longitude <- runif(nrow(data), -81.6, -81.5)
+        # Use actual latitude and longitude from the CSV file
         rides_data(data)
         updateSelectInput(session, "theme_park", choices = unique(data$theme_park))
         updateSelectInput(session, "sub_land", choices = c("All", unique(data$sub_land)))
