@@ -1,0 +1,13 @@
+name: disney-app
+title: disney-app
+username:
+account: ashley-henry
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12407546
+bundleId: 8945703
+url: https://ashley-henry.shinyapps.io/disney-app/
+when: 1722807584.64282
+lastSyncTime: 1722807584.64283
+asMultiple: FALSE
+asStatic: FALSE
