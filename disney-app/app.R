@@ -49,7 +49,7 @@ ui <- dashboardPage(
                                      choices = NULL)
                 ),
                 box(
-                  title = "Wait Times (All Attractions)",
+                  title = "Park Wait Times",
                   status = "primary",
                   solidHeader = TRUE,
                   width = 9,
@@ -210,15 +210,31 @@ server <- function(input, output, session) {
     leaflet(filtered_data()) %>%
       addTiles() %>%
       addCircleMarkers(
+        data = filtered_data() %>% filter(type == "ride"),
         ~longitude, ~latitude,
         color = ~pal(sub_land),
         radius = 8,
         fillOpacity = 0.8,
         stroke = FALSE,
         popup = ~paste0("<strong>", name, "</strong><br>",
+                        "Type: Ride<br>",
                         "Wait Time: ", avg_wait_time, " min<br>",
                         "Height Requirement: ", ifelse(is.na(height_requirement), "None", paste(height_requirement, "inches")),
                         "<br>Sub-land: ", sub_land),
+        label = ~name
+      ) %>%
+      addRectangles(
+        data = filtered_data() %>% filter(type == "attraction"),
+        ~longitude - 0.0001, ~latitude - 0.0001, ~longitude + 0.0001, ~latitude + 0.0001,
+        color = ~pal(sub_land),
+        fillColor = ~pal(sub_land),
+        fillOpacity = 0.8,
+        stroke = TRUE,
+        weight = 1,
+        popup = ~paste0("<strong>", name, "</strong><br>",
+                        "Type: Attraction<br>",
+                        "Wait Time: ", avg_wait_time, " min<br>",
+                        "Sub-land: ", sub_land),
         label = ~name
       ) %>%
       addLegend(
