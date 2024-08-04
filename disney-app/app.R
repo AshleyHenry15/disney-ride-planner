@@ -23,7 +23,7 @@ read_csv_data <- function(file_path) {
 }
 
 # CSV file path - Update this to your local file path
-csv_file_path <- "disney-ride-data.csv"  # Modify this path
+csv_file_path <- "disney-all-data.csv"  # Modify this path
 
 ui <- dashboardPage(
   dashboardHeader(title = "Disney World Ride Wait Times"),
@@ -131,7 +131,7 @@ server <- function(input, output, session) {
     req(filtered_data())
     # Use Dark2 color palette
     dark_colors <- brewer.pal(n = 8, name = "Dark2")
-    ggplot(filtered_data(), aes(x = reorder(ride_name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
+    ggplot(filtered_data(), aes(x = reorder(name, avg_wait_time), y = avg_wait_time, fill = sub_land)) +
       geom_bar(stat = "identity") +
       coord_flip() +
       labs(x = "Ride Name", y = "Average Wait Time (minutes)", fill = "Sub-land") +
@@ -162,7 +162,7 @@ server <- function(input, output, session) {
         radius = 8,
         fillOpacity = 0.8,
         stroke = FALSE,
-        popup = ~paste0("<strong>", ride_name, "</strong><br>",
+        popup = ~paste0("<strong>", name, "</strong><br>",
                         "Wait Time: ", avg_wait_time, " min<br>",
                         "Height Requirement: ", ifelse(is.na(height_requirement), "None", paste(height_requirement, "inches")),
                         "<br>Sub-land: ", sub_land),

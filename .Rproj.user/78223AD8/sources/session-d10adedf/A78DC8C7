@@ -3,7 +3,7 @@
     "path": "~/GitHub/Repositories/disney-app/disney-app/app.R",
     "project_path": "disney-app/app.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "3925075961",
     "contents": "",
     "dirty": false,
     "created": 1722738442737.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "137,20",
-        "scrollLine": "124"
+        "cursorPosition": "164,36",
+        "scrollLine": "155"
     },
     "folds": "",
-    "lastKnownWriteTime": 1722790957,
+    "lastKnownWriteTime": 1722800525,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1722790957059,
+    "last_content_update": 1722800525043,
     "read_only": false,
     "read_only_alternatives": []
 }
